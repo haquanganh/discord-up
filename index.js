@@ -34,12 +34,7 @@ const sendTelegram = (text) => {
 };
 
 bot.on('messageCreate', async (msg) => {
-  // ignore messages from bots
-  if (
-    msg.author.bot ||
-    !process.env.LISTEN_CHANNELS.split(',').includes(msg.channel.guild?.name)
-  )
-    return;
+  if (msg.author.bot || msg.author.username === bot.user.username) return;
 
   // Example: notify when someone mentions you
   const text = `[${msg.channel.guild?.name ?? 'DM'} #${
